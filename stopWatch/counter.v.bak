@@ -1,0 +1,26 @@
+module counter(input clk_en, input pause, output wire [31:0]counter);
+	reg[1:0] running = 2'b01;
+	reg [31:0]count;
+	assign counter = count;
+	always@(posedge clk_en)
+		begin
+			if(running == 2'b01)
+				begin
+					count = count+1;
+				end
+		end
+		
+	always@(posedge pause)
+		begin
+			if(running == 2'b00)
+				begin 
+					running = 2'b01;
+				end
+			else if(running == 2'b01)
+				begin
+					running = 2'b00;
+				end
+		end
+		
+
+endmodule
